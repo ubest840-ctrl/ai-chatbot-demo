@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
@@ -6,7 +6,7 @@ const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 export default function App() {
   const [persona, setPersona] = useState("hospitality");
   const [messages, setMessages] = useState([
-    { role: "assistant", content: `Initialized in ${persona} mode.` }
+    { role: "assistant", content: "Bot ready. Select a mode and type to test." }
   ]);
   const [userInput, setUserInput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -26,17 +26,16 @@ export default function App() {
     setIsProcessing(true);
 
     try {
-      // Use 'gemini-1.5-flash' - this is the most consistently available model
+      // Using 'gemini-1.5-flash-latest' which is the stable alias
       const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash", 
+        model: "gemini-1.5-flash-latest", 
         systemInstruction: personaInstructions[persona] 
       });
       
       const result = await model.generateContent(userInput);
       setMessages([...newMessages, { role: "assistant", content: result.response.text() }]);
     } catch (error) {
-      // This will now show the REAL error instead of a generic message
-      setMessages([...newMessages, { role: "assistant", content: "DEBUG ERROR: " + error.message }]);
+      setMessages([...newMessages, { role: "assistant", content: "MODEL ERROR: Check your API Key permissions in Google AI Studio." }]);
     } finally {
       setIsProcessing(false);
     }
@@ -60,4 +59,4 @@ export default function App() {
       </form>
     </div>
   );
-    }
+                                                                                                                                                                                                  }
