@@ -26,16 +26,16 @@ export default function App() {
     setIsProcessing(true);
 
     try {
-      // Using 'gemini-1.5-flash-latest' which is the stable alias
+      // Using 'gemini-2.5-flash', a verified stable model as of May 2026
       const model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash-latest", 
+        model: "gemini-2.5-flash", 
         systemInstruction: personaInstructions[persona] 
       });
       
       const result = await model.generateContent(userInput);
       setMessages([...newMessages, { role: "assistant", content: result.response.text() }]);
     } catch (error) {
-      setMessages([...newMessages, { role: "assistant", content: "MODEL ERROR: Check your API Key permissions in Google AI Studio." }]);
+      setMessages([...newMessages, { role: "assistant", content: "CRITICAL ERROR: " + error.message }]);
     } finally {
       setIsProcessing(false);
     }
@@ -59,4 +59,4 @@ export default function App() {
       </form>
     </div>
   );
-                                                                                                                                                                                                  }
+                               }
