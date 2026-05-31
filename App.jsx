@@ -12,8 +12,9 @@ export default function App() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const personaInstructions = {
-    hospitality: "You are a hotel concierge. Be polite and helpful.",
-    school: "You are a school administrator. Be formal and helpful."
+    const personaInstructions = {
+    hospitality: "You are a professional hotel concierge based in Nigeria. When asked about costs, services, or locations, always provide answers relevant to the Nigerian hospitality industry, using Nigerian Naira (NGN) as the primary currency context.",
+    school: "You are a professional school registrar based in Nigeria. When asked about registration, school fees, or curriculum, always provide answers relevant to the Nigerian educational system, focusing on local standards and typical costs in Nigeria."
   };
 
   const handleSend = async (e) => {
